@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript For Loop Animation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    .box {
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 2px solid #aaa;
+      border-radius: 10px;
+      background: #fff;
+      transition: background 0.3s;
+    }
+    .active {
+      background: #d1ffd1;
+      border-color: green;
+    }
+    .code-line {
+      font-family: monospace;
+      margin-bottom: 1rem;
+    }
+    #output {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>🔁 JavaScript For Loop Animation</h2>
+
+  <div id="init" class="box">1️⃣ Initialization: <span class="code-line">let i = 0;</span></div>
+  <div id="condition" class="box">2️⃣ Condition Check: <span class="code-line">i &lt; 5</span></div>
+  <div id="execution" class="box">3️⃣ Code Execution: <span class="code-line">console.log(i);</span></div>
+  <div id="increment" class="box">4️⃣ Increment: <span class="code-line">i++</span></div>
+
+  <div id="output">Output:</div>
+
+  <script>
+    const initBox = document.getElementById("init");
+    const condBox = document.getElementById("condition");
+    const execBox = document.getElementById("execution");
+    const incBox = document.getElementById("increment");
+    const output = document.getElementById("output");
+
+    let i = 0;
+
+    function highlight(box) {
+      [initBox, condBox, execBox, incBox].forEach(el => el.classList.remove("active"));
+      box.classList.add("active");
+    }
+
+    async function loopAnimation() {
+      highlight(initBox);
+      await delay(2000);
+
+      while (true) {
+        highlight(condBox);
+        await delay(2000);
+
+        if (i >= 5) break;
+
+        highlight(execBox);
+        await delay(2000);
+        output.innerHTML += ` <span style="color:blue">${i}</span>`;
+
+        highlight(incBox);
+        await delay(2000);
+        i++;
+      }
+
+      highlight(condBox);
+      await delay(2000);
+      output.innerHTML += "<br>✅ Loop finished.";
+    }
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    loopAnimation();
+  </script>
+</body>
+</html>
